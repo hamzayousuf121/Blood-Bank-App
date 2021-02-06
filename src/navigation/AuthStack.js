@@ -8,6 +8,8 @@ const AuthStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Screens.Home} />
+      <Stack.Screen name="Donation" component={Screens.Donation} />
+      <Stack.Screen name="DonarList" component={Screens.DonarList} />
     </Stack.Navigator>
   );
 };

@@ -6,6 +6,7 @@ const initalState = {
   loading: false,
   isLogIn: false,
   user: '',
+  appLoading: true
 };
 
 export default (state = initalState, action) => {

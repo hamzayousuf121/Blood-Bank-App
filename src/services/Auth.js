@@ -7,12 +7,18 @@ export const createUserWithEmailAndPassword = (email, password) =>
 export const signInWithEmailAndPassword = (email, password) =>
   auth().signInWithEmailAndPassword(email, password);
 
-export const createUser = (uid, data) =>
-  firestore().collection('Users').doc(uid).set(data);
+export const createUser = (uid, data) => {
+  console.log(data, uid)
+  return firestore().collection('Users').doc(uid).set(data);
+}
+  
 
 export const getUser = async (uid) =>
   firestore().collection('Users').doc(uid).get();
 
 export const logOut = () => auth().signOut();
 
-export const getUsers = () => firestore().collection('Users').get();
+export const getDonars = () => firestore().collection('Donars').get();
+
+export const setDonars = (uid, data) => firestore().collection('Donars').doc(uid).set(data);
+

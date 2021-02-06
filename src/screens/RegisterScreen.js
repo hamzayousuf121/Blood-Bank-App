@@ -36,7 +36,8 @@ console.log(state)
   useEffect(()=>{
     if(store.register){
       dispatch({type: authState, payload: {register: false, }})
-      navigation.navigate('Login');
+      navigation.navigate("Login")
+      console.log('UseEffect')
     }
   }, [store.register])
   return (
