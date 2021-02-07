@@ -1,10 +1,14 @@
-import React, {useState} from 'react';
-import {View, ScrollView, SafeAreaView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { SafeAreaView} from 'react-native';
 import {SearchBar} from 'react-native-elements';
 import Cards from '../components/Cards';
+import {useDispatch, useSelector} from 'react-redux';
+import {getDonars} from '../redux/Actions/Auth';
 
 export default function DonarList() {
   const [search, setSearch] = useState('');
+  const dispatch = useDispatch();
+  const store = useSelector(state => state.Auth)
   const [users, setUsers] = useState([
     {
       name: 'Hamza',
@@ -42,7 +46,14 @@ export default function DonarList() {
       bloodGroup: 'O',
     },
   ]);
-  const filterUsers = users.filter((user) =>
+
+
+  useEffect(()=>{
+    dispatch(getDonars())
+    console.log(store, "Donar List");
+  },[])
+
+  const filterDonars = users.filter((user) =>
     user.bloodGroup.toLowerCase().includes(search.toLowerCase()),
   );
 
@@ -59,7 +70,7 @@ export default function DonarList() {
           marginHorizontal: 7,
         }}
       />
-      <Cards users={filterUsers} />
+      <Cards users={filterDonars} />
     </SafeAreaView>
   );
 }

@@ -1,4 +1,4 @@
-import {authState, Logout} from '../types';
+import {authState, Logout, authDonars} from '../types';
 import * as Auth from '../../services/Auth';
 
 export const Login = (email, password) => {
@@ -63,7 +63,23 @@ export const getDonars = () => {
       const response = await Auth.getDonars();
       console.log('response', response);
       if (response) {
-        dispatch({type: authState, payload: {loading: false, users: response}});
+        dispatch({type: authDonars, payload: {loading: false, donars: response._docs}});
+      }
+    } catch (error) {
+      console.log('error---> ', error);
+      dispatch({type: authState, payload: {loading: false}});
+    }
+  };
+};
+
+export const addDonars = (uid, data) => {
+  return async (dispatch) => {
+    dispatch({type: authState, payload: {loading: true}});
+    try {
+      const response = await Auth.setDonars(uid, data);
+      console.log('response', response);
+      if (response) {
+        dispatch({type: authState, payload: {loading: false}});
       }
     } catch (error) {
       console.log('error---> ', error);

@@ -1,4 +1,4 @@
-import {authState, Logout} from '../types';
+import {authState, Logout, authDonars} from '../types';
 
 const initalState = {
   login: false,
@@ -6,7 +6,8 @@ const initalState = {
   loading: false,
   isLogIn: false,
   user: '',
-  appLoading: true
+  appLoading: true,
+  donars: ''
 };
 
 export default (state = initalState, action) => {
@@ -15,6 +16,9 @@ export default (state = initalState, action) => {
       return {...state, ...action.payload};
     case Logout:
       return initalState;
+      case authDonars:
+        console.log(action.payload, 'Calling Auth Donrs')
+        return {...state, loading: action.payload.loading, donars: action.payload.donars}
     default:
       return state;
   }

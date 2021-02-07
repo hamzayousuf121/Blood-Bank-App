@@ -8,7 +8,6 @@ export const signInWithEmailAndPassword = (email, password) =>
   auth().signInWithEmailAndPassword(email, password);
 
 export const createUser = (uid, data) => {
-  console.log(data, uid)
   return firestore().collection('Users').doc(uid).set(data);
 }
   
@@ -20,5 +19,7 @@ export const logOut = () => auth().signOut();
 
 export const getDonars = () => firestore().collection('Donars').get();
 
-export const setDonars = (uid, data) => firestore().collection('Donars').doc(uid).set(data);
+export const setDonars = (uid, data) => {
+ return firestore().collection('Donars').doc().set(data);
+}
 

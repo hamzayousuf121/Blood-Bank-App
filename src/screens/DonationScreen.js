@@ -3,16 +3,19 @@ import { StyleSheet, View, SafeAreaView, ScrollView, Alert} from 'react-native';
 import { Input, Text, Button } from 'react-native-elements';
 import {useDispatch, useSelector} from 'react-redux'
 import { Picker } from '@react-native-picker/picker';
-
+import {authState} from '../redux/types';
+import {addDonars} from '../redux/Actions/Auth'
 const DonationScreen = ({navigation}) => {
 
   const [state, setState] = useState({
     full_name: '',
-    age: '',
+    age: null,
     location: '',
-    gender: '',
-    phone_no: '',
-    blood_group: '0'
+    gender: 'Male',
+    phone_no: null,
+    blood_group: '0',
+    email: '',
+    id: ''
   })
 
    const dispatch = useDispatch();
@@ -22,21 +25,27 @@ const DonationScreen = ({navigation}) => {
     const {full_name, age, location, gender, phone_no, blood_group} = state;
 
     if(full_name && age && location && gender && phone_no && blood_group){
-        console.log(state)
-    }
+        dispatch(addDonars(store.user.id, state))
+    } 
 
     else{
       Alert.alert('All Fields Are Required')
     }
 
   }
+  useEffect(() => {
+    setState({...state, email: store.user.email, id: store.user.id})
+    console.log('useEffect Call')
+  }, [])
 
-//   useEffect(()=>{
-//     if(store.register){
-//       dispatch({type: authState, payload: {register: false, }})
-//       navigation.navigate('Login');
-//     }
-//   }, [store.register])
+  useEffect(()=>{
+    
+    if(store.loading){
+      //setDonars(store.user.id, state)
+      dispatch({type: authState, payload: {loading: false, }})
+      navigation.navigate('DonarList');
+    }
+  }, [store.loading])
   return (
    <SafeAreaView style={{flex: 1}}>
      <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1,}}>
@@ -46,7 +55,7 @@ const DonationScreen = ({navigation}) => {
           textAlign:'center', padding: 10, fontSize: 20, fontWeight: 'bold',}}>Blood Donation Form</Text>
         </View>
 
-     <View style={{flex: 1, justifyContent: 'center',}}>
+     <View style={{flex: 1, justifyContent: 'center', marginVertical: 20}}>
      
       <Text style={styles.label}>Full Name:</Text>
       <Input
@@ -57,10 +66,10 @@ const DonationScreen = ({navigation}) => {
       <Text style={styles.label}>Blood Group:</Text>
       <View style={{ marginHorizontal: 10, borderBottomWidth: 1, borderBottomColor: '#99a3ac', marginBottom: 25 }}>
         <Picker
-          selectedValue={state.bloodGroup}
+          selectedValue={state.blood_group}
           style={{ height: 50, width: '100%' }}
           onValueChange={(itemValue, itemIndex) =>
-            setState({bloodGroup: itemValue})
+            setState({...state, blood_group: itemValue})
           }>
           <Picker.Item label="0" value="0" />
           <Picker.Item label="A" value="A" />
@@ -88,7 +97,7 @@ const DonationScreen = ({navigation}) => {
           selectedValue={state.gender}
           style={{ height: 50, width: '100%' }}
           onValueChange={(itemValue) =>
-            setState({gender: itemValue})
+            setState({...state, gender: itemValue})
           }>
           <Picker.Item label="Male" value="Male" />
           <Picker.Item label="Female" value="Female" />

@@ -16,8 +16,6 @@ const RegisterScreen = ({navigation}) => {
 
    const dispatch = useDispatch();
   const store = useSelector(state => state.Auth);
-console.log(store, 'Store')
-console.log(state)
   const registerUser = () => {
     const {name, email, password} = state;
 
@@ -57,27 +55,6 @@ console.log(state)
         value={state.name}
         onChangeText={(val) => setState({ ...state, name: val })}
       />
-      {/* <Text style={styles.label}>Blood Group:</Text>
-      <View style={{ marginHorizontal: 10, borderBottomWidth: 1, borderBottomColor: '#99a3ac', marginBottom: 25 }}>
-        <Picker
-          selectedValue={state.bloodGroup}
-          style={{ height: 50, width: '100%' }}
-          onValueChange={(itemValue, itemIndex) =>
-            setState({bloodGroup: itemValue})
-          }>
-          <Picker.Item label="0" value="0" />
-          <Picker.Item label="A" value="A" />
-          <Picker.Item label="B" value="B" />
-          <Picker.Item label="AB" value="AB" />
-        </Picker>
-      </View>
-      <Text style={styles.label}>Address:</Text>
-      <Input
-        placeholder='Enter Your Address'
-        value={state.Address}
-        onChangeText={(val) => setState({ ...state, address: val })}
-      /> */}
-
       <Text style={styles.label}>Email:</Text>
       <Input
         placeholder='Enter Your Email'
