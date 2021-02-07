@@ -7,7 +7,7 @@ const initalState = {
   isLogIn: false,
   user: '',
   appLoading: true,
-  donars: ''
+  donars: []
 };
 
 export default (state = initalState, action) => {

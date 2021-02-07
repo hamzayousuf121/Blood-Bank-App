@@ -61,9 +61,8 @@ export const getDonars = () => {
     dispatch({type: authState, payload: {loading: true}});
     try {
       const response = await Auth.getDonars();
-      console.log('response', response);
       if (response) {
-        dispatch({type: authDonars, payload: {loading: false, donars: response._docs}});
+        dispatch({type: authDonars, payload: {loading: false, donars: response}});
       }
     } catch (error) {
       console.log('error---> ', error);
@@ -77,7 +76,6 @@ export const addDonars = (uid, data) => {
     dispatch({type: authState, payload: {loading: true}});
     try {
       const response = await Auth.setDonars(uid, data);
-      console.log('response', response);
       if (response) {
         dispatch({type: authState, payload: {loading: false}});
       }

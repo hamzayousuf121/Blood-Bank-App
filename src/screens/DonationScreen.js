@@ -41,7 +41,6 @@ const DonationScreen = ({navigation}) => {
   useEffect(()=>{
     
     if(store.loading){
-      //setDonars(store.user.id, state)
       dispatch({type: authState, payload: {loading: false, }})
       navigation.navigate('DonarList');
     }
@@ -80,6 +79,7 @@ const DonationScreen = ({navigation}) => {
       <Text style={styles.label}>Location:</Text>
       <Input
         placeholder='Enter Your Location'
+        keyboardType="default"
         value={state.location}
         onChangeText={(val) => setState({ ...state, location: val })}
       />
@@ -88,6 +88,7 @@ const DonationScreen = ({navigation}) => {
       <Input
         placeholder='Enter Your Age'
         value={state.age}
+        keyboardType="decimal-pad"
         onChangeText={(val) => setState({ ...state, age: val })}
       />
 
@@ -109,6 +110,7 @@ const DonationScreen = ({navigation}) => {
       <Input
         placeholder='Enter Your Phone No'
         value={state.phone_no}
+        keyboardType="phone-pad"
         onChangeText={(val) => setState({ ...state, phone_no: val })}
       />
       

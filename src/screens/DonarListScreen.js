@@ -8,53 +8,15 @@ import {getDonars} from '../redux/Actions/Auth';
 export default function DonarList() {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
-  const store = useSelector(state => state.Auth)
-  const [users, setUsers] = useState([
-    {
-      name: 'Hamza',
-      Phone_No: '03142316028',
-      location: 'Karachi',
-      gender: 'Male',
-      bloodGroup: 'A',
-    },
-    {
-      name: 'Ali Raza',
-      Phone_No: '03142518294',
-      location: 'Karachi',
-      gender: 'Male',
-      bloodGroup: 'AB',
-    },
-    {
-      name: 'Yousuf',
-      Phone_No: '03146444555',
-      location: 'Karachi',
-      gender: 'Male',
-      bloodGroup: 'B',
-    },
-    {
-      name: 'Aliraza',
-      Phone_No: '03144516028',
-      location: 'Karachi',
-      gender: 'Male',
-      bloodGroup: 'O',
-    },
-    {
-      name: 'Sana',
-      Phone_No: '035466464644',
-      location: 'Karachi',
-      gender: 'Female',
-      bloodGroup: 'O',
-    },
-  ]);
+  const store = useSelector(state => state.Auth.donars)
 
-
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getDonars())
     console.log(store, "Donar List");
   },[])
 
-  const filterDonars = users.filter((user) =>
-    user.bloodGroup.toLowerCase().includes(search.toLowerCase()),
+  const filterDonars = store?.filter((donars) =>
+  donars?.blood_group?.toLowerCase()?.includes(search?.toLowerCase()),
   );
 
   return (

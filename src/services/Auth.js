@@ -17,7 +17,18 @@ export const getUser = async (uid) =>
 
 export const logOut = () => auth().signOut();
 
-export const getDonars = () => firestore().collection('Donars').get();
+export const getDonars = async () => {
+  const fstore = await firestore().collection('Donars').get()
+  .then(querySnapshot => {
+    const arr = [];
+    querySnapshot.forEach(documentSnapshot => {
+       arr.push(documentSnapshot.data());
+    });
+    return arr;
+
+  });
+  return fstore;
+};
 
 export const setDonars = (uid, data) => {
  return firestore().collection('Donars').doc().set(data);

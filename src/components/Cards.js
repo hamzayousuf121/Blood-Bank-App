@@ -9,7 +9,7 @@ export default function Cards({users}) {
         <View style={{flex: 1, marginBottom: 15}}>
           {users.map((u, i) => (
             <Card key={i}>
-              <Card.Title>Blood Group {u.bloodGroup}</Card.Title>
+              <Card.Title>Blood Group {u.blood_group}</Card.Title>
               <Card.Divider />
               <View style={{flex: 1}}>
                 <ListItem bottomDivider>
@@ -19,7 +19,7 @@ export default function Cards({users}) {
                       justifyContent: 'space-between',
                     }}>
                     <ListItem.Title>Name</ListItem.Title>
-                    <ListItem.Title>{u.name}</ListItem.Title>
+                    <ListItem.Title>{u.full_name}</ListItem.Title>
                   </ListItem.Content>
                 </ListItem>
                 <ListItem bottomDivider>
@@ -39,7 +39,7 @@ export default function Cards({users}) {
                       justifyContent: 'space-between',
                     }}>
                     <ListItem.Title>Phone No</ListItem.Title>
-                    <ListItem.Title>{u.Phone_No}</ListItem.Title>
+                    <ListItem.Title>{u.phone_no}</ListItem.Title>
                   </ListItem.Content>
                 </ListItem>
                 <ListItem bottomDivider>
